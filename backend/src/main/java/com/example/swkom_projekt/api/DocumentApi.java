@@ -32,9 +32,4 @@ public class DocumentApi {
     public ResponseEntity<String> deleteDocument(@PathVariable String id) {
         return ResponseEntity.ok("Delete endpoint is defined");
     }
-
-    @GetMapping("/{id}/ocr-status")
-    public ResponseEntity<String> getOcrStatus(@PathVariable String id) {
-        return ResponseEntity.ok("OCR status endpoint is defined");
-    }
 }
