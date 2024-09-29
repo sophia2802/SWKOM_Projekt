@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path="documents")
 public class DocumentApi {
-    // Endpoints hardcoded
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadDocument() {
