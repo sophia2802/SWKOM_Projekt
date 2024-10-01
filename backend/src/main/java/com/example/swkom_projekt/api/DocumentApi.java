@@ -1,16 +1,17 @@
 package com.example.swkom_projekt.api;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping(path="documents")
 public class DocumentApi {
-    // Endpoints hardcoded
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadDocument() {
-        return ResponseEntity.ok("Upload endpoint is defined.");
+    public ResponseEntity<String> uploadDocument(@RequestParam("file") MultipartFile file) {
+        return ResponseEntity.ok().contentType(MediaType.TEXT_PLAIN).body("Upload end.");
     }
 
     @GetMapping("/search")

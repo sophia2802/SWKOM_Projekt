@@ -1,4 +1,29 @@
+version: '3'
 services:
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"  # Frontend läuft jetzt auf Port 80 und wird durch Nginx ausgeliefert
+    depends_on:
+      - backend  # Das Frontend startet erst, wenn das Backend bereit ist
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    container_name: backend
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/dms
+      SPRING_DATASOURCE_USERNAME: sophia
+      SPRING_DATASOURCE_PASSWORD: password
+    ports:
+      - "8080:8080"
+
   postgres:
     image: 'postgres:latest'
     environment:
@@ -9,29 +34,6 @@ services:
       - '5432:5432'
     volumes:
       - "postgres_data:/var/lib/postgresql/data"
-
-  app:
-    build:
-      context: ./backend
-    ports:
-      - '8080:8080'
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/dms
-      SPRING_DATASOURCE_USERNAME: sophia
-      SPRING_DATASOURCE_PASSWORD: password
-    depends_on:
-      - postgres
-
-  nginx:
-    image: nginx:alpine
-    container_name: nginx-webserver
-    ports:
-      - '80:80'
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./frontend/dist/frontend/browser:/usr/share/nginx/html
-    depends_on:
-      - app
 
 volumes:
   postgres_data:
