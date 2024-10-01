@@ -13,7 +13,7 @@ export class DocumentService {
   constructor(private http: HttpClient) {}
 
   uploadDocument(file: File): Observable<any> {
-    const formData: FormData = new FormData();
+    const formData = new FormData();
     formData.append('file', file);
 
     return this.http.post<string>(this.documentUrl + '/upload', formData, { responseType: 'text' as 'json' });

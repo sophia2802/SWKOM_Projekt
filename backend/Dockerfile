@@ -1,4 +1,4 @@
 # Dockerfile for Spring Boot Backend
 FROM openjdk:17-jdk-slim
-COPY target/SWKOM_Projekt-0.0.1-SNAPSHOT.jar app.jar
+COPY ../target/SWKOM_Projekt-0.0.1-SNAPSHOT.jar app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
