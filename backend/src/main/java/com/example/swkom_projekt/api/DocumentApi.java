@@ -1,17 +1,26 @@
 package com.example.swkom_projekt.api;
 
+import com.example.swkom_projekt.service.DocumentService;
+import com.example.swkom_projekt.service.dtos.DocumentDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping(path="documents")
 public class DocumentApi {
 
+    @Autowired
+    private DocumentService documentService;
+
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadDocument(@RequestParam("file") MultipartFile file) {
-        return ResponseEntity.ok().contentType(MediaType.TEXT_PLAIN).body("Upload end.");
+    public ResponseEntity<String> uploadDocument(@RequestParam("file") MultipartFile file) throws IOException {
+        documentService.uploadDocument(file);
+        return ResponseEntity.ok().contentType(MediaType.TEXT_PLAIN).body("Upload successful.");
     }
 
     @GetMapping("/search")
