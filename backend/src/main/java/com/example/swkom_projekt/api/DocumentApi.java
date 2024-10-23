@@ -19,6 +19,7 @@ public class DocumentApi {
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadDocument(@RequestParam("file") MultipartFile file) throws IOException {
+        //DTO
         documentService.uploadDocument(file);
         return ResponseEntity.ok().contentType(MediaType.TEXT_PLAIN).body("Upload successful.");
     }
