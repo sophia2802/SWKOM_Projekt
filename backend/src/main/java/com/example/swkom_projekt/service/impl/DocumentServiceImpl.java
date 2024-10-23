@@ -25,35 +25,22 @@ public class DocumentServiceImpl implements DocumentService {
     private DocumentMapper documentMapper;
 
     @Override
-    public void uploadDocument(MultipartFile file) throws IOException {
-        DocumentEntity documentEntity = DocumentEntity.builder()
-                .name(file.getOriginalFilename())        // Dateiname
-                .description("Uploaded file: " + file.getOriginalFilename()) // Beispielbeschreibung
-                .type(file.getContentType())             // Typ
-                .size(file.getSize())                    // Dateigröße
-                .uploadDate(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME)) // Aktuelles Datum
-                .fileData(file.getBytes())               // Dateiinhalt in byte[]
-                .build();
-
+    public void uploadDocument(DocumentDto documentDto) throws IOException {
+        DocumentEntity documentEntity = documentMapper.mapToEntity(documentDto);
         documentRepository.save(documentEntity);
     }
 
-    /*@Override
+    @Override
     public void updateDocument(Long id, DocumentDto documentDto) {
         DocumentEntity existingDocument = documentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Document not found"));
 
-        // Felder aktualisieren
-        existingDocument.setName(documentDto.getName());
-        existingDocument.setDescription(documentDto.getDescription());
-        existingDocument.setType(documentDto.getType());
-        existingDocument.setSize(documentDto.getSize());
-        existingDocument.setUploadDate(documentDto.getUploadDate());
-
-        documentRepository.save(existingDocument);
+        DocumentEntity updatedDocument = documentMapper.mapToEntity(documentDto);
+        updatedDocument.setId(existingDocument.getId());
+        documentRepository.save(updatedDocument);
     }
 
-    @Override
+   @Override
     public void deleteDocument(Long id) {
         documentRepository.deleteById(id);
     }
@@ -70,5 +57,5 @@ public class DocumentServiceImpl implements DocumentService {
         return documentRepository.findAll().stream()
                 .map(documentMapper::mapToDto)
                 .collect(Collectors.toList());
-    }*/
+    }
 }

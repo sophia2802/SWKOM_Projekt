@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface DocumentService {
 
-    void uploadDocument(MultipartFile file) throws IOException;
+    void uploadDocument(DocumentDto documentDto) throws IOException;
 
-    /*void updateDocument(Long id, DocumentDto documentDto);
+    void updateDocument(Long id, DocumentDto documentDto);
 
     void deleteDocument(Long id);
 
     DocumentDto getDocumentById(Long id);
 
-    List<DocumentDto> getAllDocuments();*/
+    List<DocumentDto> getAllDocuments();
 }
