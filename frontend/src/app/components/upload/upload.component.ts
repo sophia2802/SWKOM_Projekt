@@ -1,22 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DocumentService } from '../services/document.service';
+import { DocumentService } from '../../services/document.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-upload',
   standalone: true,
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.css'],
-  imports: [FormsModule],
+  imports: [FormsModule, MatIconModule],
 })
 export class UploadComponent {
+  @ViewChild('fileInput') fileInput!: ElementRef; // Referenz zum versteckten Input
   selectedFile: File | null = null;
 
   constructor(private documentService: DocumentService) {}
 
-  onFileSelected(event: any) {
+  onFileButtonClick(): void {
+    this.fileInput.nativeElement.click();
+  }
+
+  onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
-    console.log(this.selectedFile);
+    if (this.selectedFile) {
+      this.onSubmit(); // Automatischer Upload nach Auswahl
+    }
   }
 
   onSubmit() {

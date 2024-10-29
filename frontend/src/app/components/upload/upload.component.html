@@ -1,0 +1,4 @@
+<button mat-icon-button class="plus-button" (click)="onFileButtonClick()">
+  <mat-icon>add</mat-icon>
+</button>
+<input type="file" #fileInput (change)="onFileSelected($event)" hidden />

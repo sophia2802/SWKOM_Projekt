@@ -1,0 +1,31 @@
+/* Button-Styles für das Plus-Symbol */
+.plus-button {
+  position: fixed;        /* Fixiert den Button auf der Seite */
+  left: 30px;             /* Abstand vom linken Bildschirmrand */
+  bottom: 30px;           /* Abstand vom unteren Bildschirmrand */
+  width: 50px;            /* Breite des Buttons */
+  height: 50px;           /* Höhe des Buttons */
+  background-color: #007bff; /* Button-Farbe */
+  color: white;           /* Symbolfarbe */
+  border-radius: 50%;     /* Runde Form */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Schatten */
+  cursor: pointer;
+  font-size: 24px;        /* Größe des Plus-Symbols */
+}
+
+/* Hover-Effekt */
+.plus-button:hover {
+  background-color: #0056b3; /* Dunklere Farbe beim Hover */
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15); /* Stärkerer Schatten */
+}
+
+/* Optional: Fokus-Effekt */
+.plus-button:focus {
+  outline: none;
+  box-shadow: 0px 0px 0px 4px rgba(0, 123, 255, 0.5); /* Blauer Fokus-Ring */
+}
+
+
