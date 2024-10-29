@@ -1,0 +1,36 @@
+
+<div class="document-container">
+  <h2>Documents</h2>
+  <table mat-table [dataSource]="documents" class="mat-elevation-z8">
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let document"> {{ document.id }} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let document">
+         <span class="clickable-name"> <!--(click)="showDocument(document.id)"-->
+           {{ document.name }}
+         </span>
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let document" class="actions-cell">
+        <button mat-icon-button color="warn">
+          <mat-icon class="small-icon">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+  <!-- Header and Row Definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

@@ -1,0 +1,40 @@
+h2 {
+  color: black;
+  font-size: 1.3em;
+}
+
+.document-container {
+  max-width: 800px;
+  margin: 50px auto 20px auto;
+  padding: 20px;
+  background-color: rgba(240, 240, 240, 0.8);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+td {
+  padding: 8px 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.actions-cell {
+  text-align: right;
+  padding-right: 16px;
+}
+
+.clickable-name {
+  cursor: pointer;
+}
+
+.clickable-name:hover {
+  color: #0056b3;
+}
+
+.small-icon {
+  font-size: 16px;
+}
