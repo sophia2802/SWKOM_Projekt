@@ -20,7 +20,7 @@ export class DocumentService {
   }
 
   findAllDocuments(): Observable<any[]> {
-    return this.http.get<any[]>(this.documentUrl + '/all');
+    return this.http.get<any[]>(this.documentUrl);
   }
 
   findDocumentById(id: number): Observable<any> {
