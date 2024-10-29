@@ -23,6 +23,18 @@ services:
     ports:
       - "8080:8080"
 
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"  # Standardport für RabbitMQ
+      - "15672:15672" # Management UI Port
+    environment:
+      RABBITMQ_DEFAULT_USER: sophia
+      RABBITMQ_DEFAULT_PASS: Login4rabbitMQ
+    volumes:
+      - "rabbitmq_data:/var/lib/rabbitmq"
+
   postgres:
     image: 'postgres:latest'
     environment:
@@ -36,3 +48,5 @@ services:
 
 volumes:
   postgres_data:
+  rabbitmq_data:
+
