@@ -1,32 +1,35 @@
-h2 {
-  color: black;
-  font-size: 1.3em;
-}
+/* Dokument-Container */
 
+.headline{
+  font-size: 1.5em;
+  color: royalblue; /* Setze die Schriftfarbe, z.B. ein Orange-Ton */
+}
 .document-container {
   max-width: 800px;
   margin: 50px auto 20px auto;
+  background-color: rgba(245, 245, 245, 1); /* Hellgrauer Hintergrund */
+  border-radius: 15px; /* Abrundung der Ecken */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Leichter Schatten */
   padding: 20px;
-  background-color: rgba(240, 240, 240, 0.8);
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-table {
-  width: 100%;
-  table-layout: fixed;
-}
-
-td {
-  padding: 8px 16px;
-  border-bottom: 1px solid #e0e0e0;
+.documents-table {
+  background-color: transparent !important;
 }
 
 .actions-cell {
-  text-align: right;
-  padding-right: 16px;
+  text-align: right; /* Inhalt der Zelle nach rechts ausrichten */
+  padding-right: 0; /* Falls zusätzlicher Abstand nötig ist, kannst du hier einen Wert hinzufügen */
 }
 
+/* Tabellenzellen */
+td {
+  padding: 8px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: transparent;
+}
+
+/* Klickbarer Name */
 .clickable-name {
   cursor: pointer;
 }
@@ -35,6 +38,8 @@ td {
   color: #0056b3;
 }
 
+/* Kleineres Mülleimer-Icon in Rot */
 .small-icon {
   font-size: 16px;
+  color: #d32f2f; /* Rot für das Mülleimer-Icon */
 }
