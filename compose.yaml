@@ -46,7 +46,21 @@ services:
     volumes:
       - "postgres_data:/var/lib/postgresql/data"
 
+  ocrservice:
+    build:
+      context: "C:/Users/sophi/OneDrive/Desktop/Informatik/ocr"  # Absoluter Pfad zum OCR-Service-Projekt
+      dockerfile: Dockerfile
+    container_name: ocrservice
+    depends_on:
+      - rabbitmq
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+    volumes:
+      - shared-files:/shared-files
+    restart: always
+
 volumes:
+  shared-files:
   postgres_data:
   rabbitmq_data:
 

@@ -14,6 +14,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,8 +38,15 @@ public class DocumentServiceImpl implements DocumentService {
     public void uploadDocument(DocumentDto documentDto) throws IOException {
         DocumentEntity documentEntity = documentMapper.mapToEntity(documentDto);
         documentRepository.save(documentEntity);
-        amqpTemplate.convertAndSend("documentQueue", "Document uploaded: " + documentDto.getName());
-        logger.info("Document successfully uploaded and message sent to queue.");
+
+        String sharedFilesDir = "/shared-files/";
+        String fileName = documentDto.getName();
+        Path filePath = Paths.get(sharedFilesDir + fileName);
+
+        Files.write(filePath, documentDto.getFileData());
+
+        amqpTemplate.convertAndSend("documentQueue", filePath.toString());
+        logger.info("Document uploaded and file path sent to documentQueue: " + filePath);
     }
 
     @Override
