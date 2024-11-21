@@ -3,6 +3,7 @@ package com.example.swkom_projekt.service.impl;
 import com.example.swkom_projekt.persistence.entities.DocumentEntity;
 import com.example.swkom_projekt.persistence.repositories.DocumentRepository;
 import com.example.swkom_projekt.service.DocumentService;
+import com.example.swkom_projekt.service.MinioService;
 import com.example.swkom_projekt.service.dtos.DocumentDto;
 import com.example.swkom_projekt.service.exceptions.DocumentNotFoundException;
 import com.example.swkom_projekt.service.mapper.DocumentMapper;
@@ -32,6 +33,9 @@ public class DocumentServiceImpl implements DocumentService {
     @Autowired
     private AmqpTemplate amqpTemplate;
 
+    @Autowired
+    private MinioService minioService;
+
     private static final Logger logger = LoggerFactory.getLogger(DocumentServiceImpl.class);
 
     @Override
@@ -44,6 +48,18 @@ public class DocumentServiceImpl implements DocumentService {
         Path filePath = Paths.get(sharedFilesDir + fileName);
 
         Files.write(filePath, documentDto.getFileData());
+
+        // Lade die Datei zu MinIO hoch
+        String bucketName = "documents";
+        try {
+            // MinIO-Upload
+            minioService.ensureBucketExists(bucketName);
+            minioService.uploadFile(bucketName, fileName, filePath.toString());
+            logger.info("File uploaded to MinIO: " + fileName);
+        } catch (Exception e) {
+            logger.error("Failed to upload file to MinIO: " + e.getMessage(), e);
+            throw new RuntimeException("File upload to MinIO failed", e);
+        }
 
         amqpTemplate.convertAndSend("documentQueue", filePath.toString());
         logger.info("Document uploaded and file path sent to documentQueue: " + filePath);

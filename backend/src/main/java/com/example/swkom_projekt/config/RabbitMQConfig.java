@@ -10,4 +10,9 @@ public class RabbitMQConfig {
     public Queue documentQueue() {
         return new Queue("documentQueue", false);
     }
+
+    @Bean
+    public Queue ocrResultQueue() {
+        return new Queue("ocrResultQueue", false);
+    }
 }
